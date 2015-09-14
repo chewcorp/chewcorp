@@ -4,12 +4,13 @@ setup(
     version = "0.0.1",
     packages = find_packages(),
     install_requires=[
+        'cement',
         'httplib2>=0.9.1',
         'google-api-python-client',
     ],
     entry_points={
         'console_scripts': [
-            'cdns=chewcorp.dns:run',
+            'chewcorp=chewcorp.cli.app:run',
         ],
     } 
 )
