@@ -14,7 +14,9 @@ class ChewcorpApp(foundation.CementApp):
         label = 'chewcorp'
         base_controller = BaseController
         extensions = [
+            'chewcorp.cli.ext.ext_dns',
             'chewcorp.cli.ext.ext_instances',
+            'chewcorp.cli.ext.ext_oauth',
         ]
         
 def run():
