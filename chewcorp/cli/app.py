@@ -20,12 +20,8 @@ class ChewcorpApp(foundation.CementApp):
         ]
         
 def run():
-    app = ChewcorpApp()
-    try:
-        app.setup()
+    with ChewcorpApp() as app:
         app.run()
-    finally:
-        app.close()
 
 if __name__ == '__main__':
     run()

@@ -3,9 +3,10 @@ import os
 from chewcorp import client
 
 class ComputeClient(client.DiscoveryClient):
-    def __init__(self, args):
-        super(ComputeClient).__init__()
+    def __init__(self, args, project):
+        super(ComputeClient, self).__init__()
         self.args = args
+        self.project = project
         self.storage_path = os.path.join(os.environ['HOME'], '.chewcorp')
         self.scope = 'https://www.googleapis.com/auth/compute.readonly'
         self.api = 'compute'
@@ -16,7 +17,7 @@ class ComputeClient(client.DiscoveryClient):
             zones = self.list_zones()
         for zone in zones:
             instances = self.service().instances().list(
-                project=self.args.project, zone=zone['description']).execute()
+                project=self.project, zone=zone['description']).execute()
             if not instances.get('items'):
                 continue
             for instance in instances['items']:
@@ -24,6 +25,6 @@ class ComputeClient(client.DiscoveryClient):
 
     def list_zones(self):
         zones = self.service().zones().list(
-            project=self.args.project).execute()
+            project=self.project).execute()
         for zone in zones['items']:
             yield zone

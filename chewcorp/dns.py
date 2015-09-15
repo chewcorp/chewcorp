@@ -15,9 +15,14 @@ class DnsClient(client.DiscoveryClient):
         self.scope = 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
         self.version = 'v1'
 
+    def get_zone(self, zone):
+        service = self.service()
+        zones = service.managedZones()
+        response = zones.get(project=self.project, managedZone=zone)
+        return response.execute()
+        
     def list_zones(self):
-        zones = self.service().managedZones()
+        service = self.service()
+        zones = service.managedZones()
         response = zones.list(project=self.project)
-        print response
-        #for zone in response['managedZones']:
-        #   print json.dumps(zone)
+        return response.execute()

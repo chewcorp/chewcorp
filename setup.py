@@ -1,7 +1,11 @@
 from setuptools import setup, find_packages
+
+import chewcorp
+version = chewcorp.__version__
+
 setup(
     name = "chewcorp",
-    version = "0.0.1",
+    version = version,
     packages = find_packages(),
     install_requires=[
         'cement',
